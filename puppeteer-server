@@ -15,10 +15,13 @@ app.post('/echo', (req, res) => {
 });
 
 app.post('/generate', async (req, res) => {
-    const pdfFilepath = await generateFromHtml(req.body);
-    console.log('file to serve: ', pdfFilepath);
-    console.log('pdf exists:', fs.existsSync(pdfFilepath));
-    res.sendFile(pdfFilepath);
+    try {
+        const pdfFilepath = await generateFromHtml(req.body);
+        res.sendFile(pdfFilepath);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error while generating PDF');
+    }
 });
 
 app.listen(port, () => {
