@@ -17,6 +17,7 @@ const options = {
     pdfDisplayHeaderFooter: false,
     pdfHeaderTemplate: null,
     pdfFooterTemplate: null,
+    args: [],
 };
 
 args.forEach(argument => mapArgToOptions(argument));
@@ -24,7 +25,12 @@ args.forEach(argument => mapArgToOptions(argument));
 function mapArgToOptions(argument) {
     const split = argument.split('=');
     split[0] = split[0].slice(2);
-    options[split[0]] = split[1];
+
+    if (split[0] === 'no-sandbox') {
+        options['args'].push('--no-sandbox')
+    } else {
+        options[split[0]] = split[1];
+    }
 }
 
 (async () => {
@@ -34,7 +40,7 @@ function mapArgToOptions(argument) {
         throw new Error('File does not exists');
     }
 
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({headless: true, args: options.args});
 
     const page = await browser.newPage();
     await page.emulateMediaType('screen');
