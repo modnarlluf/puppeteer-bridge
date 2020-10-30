@@ -5,6 +5,7 @@ const generateFromHtml = require('./generateFromHtml');
 
 const app = express();
 const port = process.env.port || 3900;
+const host = process.env.host || '127.0.0.1';
 
 app.use(bodyParser.json({limit: '500mb'}));
 
@@ -23,6 +24,6 @@ app.post('/generate', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Listening to port ${port}`);
+app.listen(port, host, () => {
+    console.log(`Listening to ${host}:${port}`);
 });
