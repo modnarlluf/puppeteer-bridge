@@ -72,8 +72,8 @@ function mapArgToOptions(argument) {
     };
 
     if (pdfOptions.displayHeaderFooter) {
-        pdfOptions.headerTemplate = headerTemplate;
-        pdfOptions.footerTemplate = footerTemplate;
+        pdfOptions.headerTemplate = options.pdfHeaderTemplate;
+        pdfOptions.footerTemplate = options.pdfFooterTemplate;
     }
 
     await page.pdf(pdfOptions);
