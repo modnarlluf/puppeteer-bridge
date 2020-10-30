@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+const express = require('express');
+const bodyParser = require('body-parser');
+const generateFromHtml = require('./generateFromHtml');
+const fs = require('fs');
+
+const app = express();
+const port = process.env.port || 3900;
+
+app.use(bodyParser.json());
+
+app.post('/echo', (req, res) => {
+    const html = req.body.html;
+    res.send(html);
+});
+
+app.post('/generate', async (req, res) => {
+    const pdfFilepath = await generateFromHtml(req.body);
+    console.log('file to serve: ', pdfFilepath);
+    console.log('pdf exists:', fs.existsSync(pdfFilepath));
+    res.sendFile(pdfFilepath);
+});
+
+app.listen(port, () => {
+    console.log(`Listening to port ${port}`);
+});
