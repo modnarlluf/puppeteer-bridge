@@ -58,11 +58,10 @@ function mapArgToOptions(argument) {
     const footerTemplate = `<p style="width: 100%; font-size: 6pt; text-align: right; padding: 0 10mm"><span class="pageNumber"></span> / <span class="totalPages"></span></p>`;
 
     await page.waitForTimeout(1000);
-
     const pdfOptions = {
         path: options.pdfOutputPath,
         format: options.pdfFormat,
-        landscape: options.pdfLandscape,
+        landscape: options.pdfLandscape === 'true' || options.pdfLandscape,
         displayHeaderFooter: options.pdfDisplayHeaderFooter === 'true' || options.pdfDisplayHeaderFooter,
         margin: {
             top: options.pdfMarginTop,
