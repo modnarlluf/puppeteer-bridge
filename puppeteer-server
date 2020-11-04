@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const generateFromHtml = require('./generateFromHtml');
 
 const app = express();
-const port = process.env.port || 3900;
-const host = process.env.host || '127.0.0.1';
+const port = process.env.PUPPERTEE_PORT || 3900;
+const host = process.env.PUPPERTEE_HOST || '127.0.0.1';
 
 app.use(bodyParser.json({limit: '500mb'}));
 
