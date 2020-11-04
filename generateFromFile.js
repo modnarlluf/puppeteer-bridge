@@ -16,6 +16,7 @@ async function generateFromFile(path, options) {
         pdfDisplayHeaderFooter: false,
         pdfHeaderTemplate: null,
         pdfFooterTemplate: null,
+        pdfPrintBackground: true,
         args: [],
     };
 
@@ -45,7 +46,8 @@ async function generateFromFile(path, options) {
             left: mergedOptions.pdfMarginLeft,
             right: mergedOptions.pdfMarginRight,
             bottom: mergedOptions.pdfMarginBottom,
-        }
+        },
+        printBackground: mergedOptions.pdfPrintBackground,
     };
 
     if (pdfOptions.displayHeaderFooter) {
