@@ -17,6 +17,7 @@ async function generateFromFile(path, options) {
         pdfHeaderTemplate: null,
         pdfFooterTemplate: null,
         pdfPrintBackground: true,
+        timeout: 1000,
         args: [],
     };
 
@@ -34,7 +35,7 @@ async function generateFromFile(path, options) {
     await page.emulateMediaType('screen');
     await page.goto('file://' + path);
 
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(mergedOptions.timeout);
 
     const pdfOptions = {
         path: mergedOptions.pdfOutputPath,
